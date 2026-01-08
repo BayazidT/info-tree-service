@@ -6,10 +6,10 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @SpringBootApplication
 @ConfigurationPropertiesScan
-public class RmsApplication {
+public class InfoTreeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RmsApplication.class, args);
+		SpringApplication.run(InfoTreeApplication.class, args);
 	}
 
 }
