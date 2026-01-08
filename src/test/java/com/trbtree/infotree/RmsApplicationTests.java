@@ -1,6 +1,5 @@
-package com.tr.rms;
+package com.trbtree.infotree;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
