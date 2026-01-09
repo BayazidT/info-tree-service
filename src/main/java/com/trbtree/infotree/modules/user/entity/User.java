@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @Entity
 @Where(clause = "is_deleted = false")
-@Table(name = "users", schema = "rms")
+@Table(name = "users", schema = "infotree")
 @Getter @Setter @Builder
 @NoArgsConstructor @AllArgsConstructor
 public class User implements UserDetails {
@@ -54,7 +54,7 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)  // ← ADD THIS
     @JoinTable(
             name = "user_roles",
-            schema = "rms",
+            schema = "infotree",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )

@@ -1,4 +1,4 @@
-CREATE TABLE rms.users (
+CREATE TABLE infotree.users (
                            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
                            username VARCHAR NOT NULL,
                            name VARCHAR NULL,

@@ -1,4 +1,4 @@
-package com.tr.rms.exception;
+package com.trbtree.infotree.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

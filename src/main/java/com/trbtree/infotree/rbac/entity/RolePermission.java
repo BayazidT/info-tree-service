@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "role_permissions", schema = "rms")
+@Table(name = "role_permissions", schema = "infotree")
 @IdClass(RolePermissionId.class)
 @Getter @Setter @Builder
 @NoArgsConstructor @AllArgsConstructor

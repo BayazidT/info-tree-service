@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "roles", schema = "rms")
+@Table(name = "roles", schema = "infotree")
 @Getter @Setter @Builder
 @NoArgsConstructor @AllArgsConstructor
 public class Role {

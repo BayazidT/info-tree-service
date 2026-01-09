@@ -1,6 +1,6 @@
 package com.trbtree.infotree.modules.user.service;
 
-import com.tr.rms.exception.DataNotFoundException;
+import com.trbtree.infotree.exception.DataNotFoundException;
 import com.trbtree.infotree.modules.user.dto.UserListResponse;
 import com.trbtree.infotree.modules.user.dto.UserRequest;
 import com.trbtree.infotree.modules.user.dto.UserResponse;

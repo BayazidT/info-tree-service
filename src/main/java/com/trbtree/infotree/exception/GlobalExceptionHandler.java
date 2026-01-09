@@ -1,4 +1,4 @@
-package com.tr.rms.exception;
+package com.trbtree.infotree.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;

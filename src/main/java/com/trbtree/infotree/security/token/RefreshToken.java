@@ -8,7 +8,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Table(name = "refresh_tokens", schema = "rms")
+@Table(name = "refresh_tokens", schema = "infotree")
 @Getter @Setter @Builder
 @NoArgsConstructor @AllArgsConstructor
 public class RefreshToken {

@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5433/infotree_db
-    username: infotree
-    password: infotree
+    username: rms
+    password: rms123
     driver-class-name: org.postgresql.Driver
 
   jpa:

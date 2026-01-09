@@ -1,4 +1,4 @@
-CREATE TABLE rms.roles (
+CREATE TABLE infotree.roles (
                            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
                            name VARCHAR(50) NOT NULL UNIQUE,
                            description TEXT NULL,
@@ -8,14 +8,14 @@ CREATE TABLE rms.roles (
 );
 
 -- Default roles
-INSERT INTO rms.roles (name, description) VALUES
+INSERT INTO infotree.roles (name, description) VALUES
                                               ('ADMIN', 'Full system access'),
                                               ('MANAGER', 'Manage restaurant operations'),
                                               ('STAFF', 'Waiters, cooks, etc.'),
                                               ('CUSTOMER', 'End-user customer');
 
 
-CREATE TABLE rms.permissions (
+CREATE TABLE infotree.permissions (
                                  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
                                  name VARCHAR(100) NOT NULL UNIQUE,
                                  description TEXT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE rms.permissions (
 );
 
 -- Example permissions
-INSERT INTO rms.permissions (name, description, module) VALUES
+INSERT INTO infotree.permissions (name, description, module) VALUES
                                                             ('user:create', 'Create new users', 'USER'),
                                                             ('user:read', 'View user details', 'USER'),
                                                             ('user:update', 'Update user info', 'USER'),
@@ -34,25 +34,25 @@ INSERT INTO rms.permissions (name, description, module) VALUES
 
 
 
-CREATE TABLE rms.role_permissions (
-                                      role_id UUID NOT NULL REFERENCES rms.roles(id) ON DELETE CASCADE,
-                                      permission_id UUID NOT NULL REFERENCES rms.permissions(id) ON DELETE CASCADE,
+CREATE TABLE infotree.role_permissions (
+                                      role_id UUID NOT NULL REFERENCES infotree.roles(id) ON DELETE CASCADE,
+                                      permission_id UUID NOT NULL REFERENCES infotree.permissions(id) ON DELETE CASCADE,
                                       PRIMARY KEY (role_id, permission_id),
                                       granted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 
-CREATE TABLE rms.user_roles (
-                                user_id UUID NOT NULL REFERENCES rms.users(id) ON DELETE CASCADE,
-                                role_id UUID NOT NULL REFERENCES rms.roles(id) ON DELETE CASCADE,
+CREATE TABLE infotree.user_roles (
+                                user_id UUID NOT NULL REFERENCES infotree.users(id) ON DELETE CASCADE,
+                                role_id UUID NOT NULL REFERENCES infotree.roles(id) ON DELETE CASCADE,
                                 assigned_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                assigned_by UUID NULL REFERENCES rms.users(id),
+                                assigned_by UUID NULL REFERENCES infotree.users(id),
                                 PRIMARY KEY (user_id, role_id)
 );
 
-CREATE TABLE rms.refresh_tokens (
+CREATE TABLE infotree.refresh_tokens (
                                     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-                                    user_id UUID NOT NULL REFERENCES rms.users(id) ON DELETE CASCADE,
+                                    user_id UUID NOT NULL REFERENCES infotree.users(id) ON DELETE CASCADE,
                                     token VARCHAR NOT NULL UNIQUE,
                                     expires_at TIMESTAMP NOT NULL,
                                     revoked_at TIMESTAMP NULL,
@@ -61,14 +61,14 @@ CREATE TABLE rms.refresh_tokens (
                                     created_from_user_agent TEXT NULL
 );
 
-CREATE INDEX idx_refresh_token ON rms.refresh_tokens(token);
-CREATE INDEX idx_refresh_user ON rms.refresh_tokens(user_id);
+CREATE INDEX idx_refresh_token ON infotree.refresh_tokens(token);
+CREATE INDEX idx_refresh_user ON infotree.refresh_tokens(user_id);
 
 
 
-CREATE TABLE rms.audit_logs (
+CREATE TABLE infotree.audit_logs (
                                 id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-                                user_id UUID NULL REFERENCES rms.users(id),
+                                user_id UUID NULL REFERENCES infotree.users(id),
                                 action VARCHAR(100) NOT NULL, -- e.g., USER_LOGIN, USER_DELETED
                                 entity_type VARCHAR(50) NULL, -- e.g., USER, ORDER
                                 entity_id UUID NULL,
@@ -79,7 +79,7 @@ CREATE TABLE rms.audit_logs (
                                 occurred_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX idx_audit_user ON rms.audit_logs(user_id);
-CREATE INDEX idx_audit_action ON rms.audit_logs(action);
-CREATE INDEX idx_audit_entity ON rms.audit_logs(entity_type, entity_id);
+CREATE INDEX idx_audit_user ON infotree.audit_logs(user_id);
+CREATE INDEX idx_audit_action ON infotree.audit_logs(action);
+CREATE INDEX idx_audit_entity ON infotree.audit_logs(entity_type, entity_id);
 
