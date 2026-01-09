@@ -1,5 +1,4 @@
 package com.trbtree.infotree.rbac.service;
-
 import com.trbtree.infotree.rbac.dto.RoleResponse;
 import com.trbtree.infotree.rbac.entity.Role;
 import com.trbtree.infotree.rbac.repository.RoleRepository;

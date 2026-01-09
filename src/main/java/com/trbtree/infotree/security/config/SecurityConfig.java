@@ -1,4 +1,3 @@
-// src/main/java/com/tr/rms/config/SecurityConfig.java
 package com.trbtree.infotree.security.config;
 
 import com.trbtree.infotree.security.jwt.JwtAuthenticationFilter;
