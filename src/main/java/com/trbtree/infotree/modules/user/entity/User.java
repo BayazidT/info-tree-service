@@ -1,4 +1,3 @@
-// src/main/java/com/tr/rms/modules/user/entity/User.java
 package com.trbtree.infotree.modules.user.entity;
 
 import com.trbtree.infotree.rbac.entity.Role;

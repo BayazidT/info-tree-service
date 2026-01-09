@@ -1,4 +1,3 @@
-// src/main/java/com/tr/rms/security/auth/AuthController.java
 package com.trbtree.infotree.security.auth;
 
 import com.trbtree.infotree.security.auth.dto.LoginRequest;
@@ -10,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 @RestController
-@RequestMapping("/api/v1/public/auth")
+@RequestMapping("/info-tree-service/api/v1/public/auth")
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthenticationService authenticationService;
