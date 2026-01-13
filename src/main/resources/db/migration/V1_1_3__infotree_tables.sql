@@ -43,39 +43,7 @@ CREATE TABLE infotree.cities (
                                  UNIQUE(name, country)
 );
 
--- =============================================
--- 4. Users (refined as discussed)
--- =============================================
-
-CREATE TABLE infotree.users (
-                                id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-
-                                username VARCHAR(100) NOT NULL,
-                                name VARCHAR(200),
-                                email VARCHAR(255),
-                                password_hash VARCHAR(255) NOT NULL,        -- Never store plaintext
-
-                                is_active BOOLEAN NOT NULL DEFAULT TRUE,
-                                is_deleted BOOLEAN NOT NULL DEFAULT FALSE,
-                                deleted_at TIMESTAMPTZ,
-
-                                failed_login_attempts INTEGER NOT NULL DEFAULT 0,
-                                locked_until TIMESTAMPTZ,
-
-                                created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                created_by UUID REFERENCES infotree.users(id),
-                                updated_by UUID REFERENCES infotree.users(id),
-                                deleted_by UUID REFERENCES infotree.users(id),
-
-    -- Constraints
-                                CONSTRAINT uk_users_username UNIQUE (username),
-                                CONSTRAINT uk_users_email UNIQUE (email) WHERE (email IS NOT NULL),
-                                CONSTRAINT chk_failed_attempts_non_negative CHECK (failed_login_attempts >= 0),
-                                CONSTRAINT chk_lock_future CHECK (locked_until IS NULL OR locked_until > CURRENT_TIMESTAMP)
-);
-
--- Indexes for users
+-- Partial unique indexes (these replace the invalid constraint and support WHERE)
 CREATE UNIQUE INDEX idx_users_username_active
     ON infotree.users(LOWER(username))
     WHERE is_deleted = FALSE AND is_active = TRUE;
