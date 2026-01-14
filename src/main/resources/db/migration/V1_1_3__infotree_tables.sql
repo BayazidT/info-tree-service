@@ -2,6 +2,12 @@
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";    -- For gen_random_uuid()
 CREATE EXTENSION IF NOT EXISTS "postgis";     -- For geospatial support
 
+-- This is the key line: install the types/functions into your app schema
+CREATE EXTENSION IF NOT EXISTS postgis SCHEMA infotree;
+
+-- Optional but good: also install topology if you ever need it
+-- CREATE EXTENSION IF NOT EXISTS postgis_topology SCHEMA infotree;
+
 -- =============================================
 -- 1. Domains and Categories
 -- =============================================
@@ -39,9 +45,19 @@ CREATE TABLE infotree.cities (
                                  country VARCHAR(100) NOT NULL DEFAULT 'Germany',
                                  admin_level VARCHAR(50),                    -- e.g., 'state', 'district'
                                  population INTEGER,
-                                 location GEOMETRY(Point, 4326),             -- PostGIS point
+                                 location GEOMETRY(Point, 4326),
+                                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                 updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                 deleted_at TIMESTAMP NULL,                  -- When soft-deleted
+                                 created_by VARCHAR NULL,
+                                 updated_by VARCHAR NULL,
+                                 deleted_by VARCHAR NULL,
                                  UNIQUE(name, country)
 );
+ALTER TABLE infotree.cities
+ALTER COLUMN location
+TYPE geometry(Point, 4326)
+USING ST_SetSRID(location::geometry, 4326);
 
 -- Partial unique indexes (these replace the invalid constraint and support WHERE)
 CREATE UNIQUE INDEX idx_users_username_active

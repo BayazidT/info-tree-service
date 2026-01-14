@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.type.SqlTypes;
 import org.locationtech.jts.geom.Point;
 
 import java.time.OffsetDateTime;
@@ -31,8 +34,8 @@ public class City {
     @Column
     private Integer population;
 
-    @Column(columnDefinition = "geometry(Point,4326)")
-    private Point location;             // centroid or representative point (requires hibernate-spatial)
+    @Column(columnDefinition = "geometry(Point,4326)", nullable = true)  // nullable if some cities have no exact point
+    private Point location;
 
     @CreationTimestamp
     @Column(updatable = false)
