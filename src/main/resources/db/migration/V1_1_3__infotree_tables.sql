@@ -32,7 +32,8 @@ CREATE TYPE business_model_enum AS ENUM ('SERVICE', 'RENT', 'SALE', 'EVENT', 'OT
 CREATE TABLE infotree.listing_types (
                                         id SERIAL PRIMARY KEY,
                                         business_model business_model_enum NOT NULL,
-                                        name VARCHAR(100) NOT NULL UNIQUE
+                                        name VARCHAR(100) NOT NULL UNIQUE,
+                                        description VARCHAR
 );
 
 -- =============================================
@@ -45,19 +46,15 @@ CREATE TABLE infotree.cities (
                                  country VARCHAR(100) NOT NULL DEFAULT 'Germany',
                                  admin_level VARCHAR(50),                    -- e.g., 'state', 'district'
                                  population INTEGER,
-                                 location GEOMETRY(Point, 4326),
+--                                  location GEOMETRY(Point, 4326),
                                  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                  deleted_at TIMESTAMP NULL,                  -- When soft-deleted
-                                 created_by VARCHAR NULL,
-                                 updated_by VARCHAR NULL,
-                                 deleted_by VARCHAR NULL,
+                                 created_by UUID NULL,
+                                 updated_by UUID NULL,
+                                 deleted_by UUID NULL,
                                  UNIQUE(name, country)
 );
-ALTER TABLE infotree.cities
-ALTER COLUMN location
-TYPE geometry(Point, 4326)
-USING ST_SetSRID(location::geometry, 4326);
 
 -- Partial unique indexes (these replace the invalid constraint and support WHERE)
 CREATE UNIQUE INDEX idx_users_username_active
@@ -93,14 +90,14 @@ CREATE TRIGGER trg_users_set_updated_at
 -- =============================================
 
 CREATE TABLE infotree.base_entities (
-                                        id SERIAL PRIMARY KEY,
+                                        id BIGSERIAL PRIMARY KEY,
                                         category_id INTEGER NOT NULL REFERENCES infotree.categories(id),
                                         listing_type_id INTEGER REFERENCES infotree.listing_types(id),  -- Required for marketplace
                                         title VARCHAR(200) NOT NULL,
                                         description TEXT,
                                         address TEXT,
                                         city_id INTEGER NOT NULL REFERENCES infotree.cities(id),
-                                        location GEOMETRY(Point, 4326) NOT NULL,
+--                                         location GEOMETRY(Point, 4326) NOT NULL,
                                         created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                         updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                         is_active BOOLEAN DEFAULT TRUE
@@ -109,7 +106,7 @@ CREATE TABLE infotree.base_entities (
 -- Indexes
 CREATE INDEX idx_base_entities_category ON infotree.base_entities(category_id);
 CREATE INDEX idx_base_entities_city ON infotree.base_entities(city_id);
-CREATE INDEX idx_base_entities_location ON infotree.base_entities USING GIST(location);
+-- CREATE INDEX idx_base_entities_location ON infotree.base_entities USING GIST(location);
 CREATE INDEX idx_base_entities_created ON infotree.base_entities(created_at);
 
 -- updated_at trigger (shared)
@@ -124,7 +121,7 @@ CREATE TRIGGER trg_base_entities_set_updated_at
 -- =============================================
 
 CREATE TABLE infotree.civic_services (
-                                         base_id INTEGER PRIMARY KEY REFERENCES infotree.base_entities(id) ON DELETE CASCADE,
+                                         base_id BIGINT PRIMARY KEY REFERENCES infotree.base_entities(id) ON DELETE CASCADE,
                                          contact_phone VARCHAR(50) NOT NULL,
                                          contact_email VARCHAR(100),
                                          is_24_7 BOOLEAN DEFAULT FALSE,
@@ -172,7 +169,7 @@ CREATE TRIGGER trg_check_marketplace_expires
 -- =============================================
 
 CREATE TABLE infotree.venues (
-                                 base_id INTEGER PRIMARY KEY REFERENCES infotree.base_entities(id) ON DELETE CASCADE,
+                                 base_id BIGINT PRIMARY KEY REFERENCES infotree.base_entities(id) ON DELETE CASCADE,
                                  opening_hours TEXT,
                                  contact_phone VARCHAR(50),
                                  website VARCHAR(300),
@@ -184,8 +181,8 @@ CREATE TABLE infotree.venues (
 -- =============================================
 
 CREATE TABLE infotree.media (
-                                id SERIAL PRIMARY KEY,
-                                base_entity_id INTEGER NOT NULL REFERENCES infotree.base_entities(id) ON DELETE CASCADE,
+                                id BIGSERIAL PRIMARY KEY,
+                                base_entity_id BIGINT NOT NULL REFERENCES infotree.base_entities(id) ON DELETE CASCADE,
                                 url VARCHAR(500) NOT NULL,
                                 alt_text VARCHAR(300),
                                 position INTEGER DEFAULT 0,
