@@ -8,7 +8,9 @@ import org.locationtech.jts.geom.Point;
 
 import java.time.OffsetDateTime;
 
-@MappedSuperclass
+@Entity
+@Table(name = "base_entities", schema = "infotree")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
 public abstract class BaseEntity {
@@ -38,8 +40,8 @@ public abstract class BaseEntity {
     @JoinColumn(name = "city_id", nullable = false)
     private City city;
 
-    @Column(columnDefinition = "geometry(Point,4326)", nullable = false)
-    private Point location;  // requires hibernate-spatial + PostGIS
+//    @Column(columnDefinition = "geometry(Point,4326)", nullable = false)
+//    private Point location;  // requires hibernate-spatial + PostGIS
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
@@ -49,6 +51,6 @@ public abstract class BaseEntity {
     @Column(nullable = false)
     private OffsetDateTime updatedAt;
 
-    @Column(nullable = false)
+    @Column(name = "is_active", nullable = false)
     private boolean active = true;
 }

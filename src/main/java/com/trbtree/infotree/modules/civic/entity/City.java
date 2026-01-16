@@ -34,8 +34,8 @@ public class City {
     @Column
     private Integer population;
 
-    @Column(columnDefinition = "geometry(Point,4326)", nullable = true)  // nullable if some cities have no exact point
-    private Point location;
+//    @Column(columnDefinition = "geometry(Point,4326)", nullable = true)  // nullable if some cities have no exact point
+//    private Point location;
 
     @CreationTimestamp
     @Column(updatable = false)

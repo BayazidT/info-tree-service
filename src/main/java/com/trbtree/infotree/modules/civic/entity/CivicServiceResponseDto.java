@@ -8,8 +8,6 @@ public record CivicServiceResponseDto(
         String description,
         String address,
         String cityName,
-        double latitude,
-        double longitude,
         String categoryName,
         String contactPhone,
         String contactEmail,
@@ -19,15 +17,12 @@ public record CivicServiceResponseDto(
 ) {
     // Optional: constructor from entity
     public static CivicServiceResponseDto fromEntity(CivicServiceEntity entity) {
-        var loc = entity.getLocation();
         return new CivicServiceResponseDto(
                 entity.getId(),
                 entity.getTitle(),
                 entity.getDescription(),
                 entity.getAddress(),
                 entity.getCity().getName(),
-                loc.getY(),  // latitude
-                loc.getX(),  // longitude
                 entity.getCategory().getName(),
                 entity.getContactPhone(),
                 entity.getContactEmail(),
