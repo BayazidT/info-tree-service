@@ -1,6 +1,5 @@
 package com.trbtree.infotree.modules.civic.controller;
 
-
 import com.trbtree.infotree.modules.civic.sevice.CivicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

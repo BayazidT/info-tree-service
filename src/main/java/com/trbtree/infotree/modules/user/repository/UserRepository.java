@@ -11,6 +11,6 @@ import java.util.UUID;
 public interface UserRepository extends JpaRepository<User, UUID> {
     Optional<User> findByUsername(String username);
 
-//    @Query("SELECT u FROM User u WHERE u.id = :id AND u.deleted = false AND u.active = true")
+    @Query("SELECT u FROM User u WHERE u.id = :id AND u.deleted = false AND u.active = true")
     Optional<User> findActiveUserById(UUID id);
 }
