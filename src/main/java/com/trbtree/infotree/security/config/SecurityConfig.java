@@ -31,6 +31,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/info-tree-service/api/v1/private/doctor/**").permitAll()
+                        .requestMatchers("/info-tree-service/api/v1/private/civic/**").permitAll()
                         .requestMatchers("/api/v1/public/auth/register").permitAll()
                         .requestMatchers("/api/v1/public/auth/login", "/error").permitAll()
                         .requestMatchers("/api/auth/refresh").permitAll()

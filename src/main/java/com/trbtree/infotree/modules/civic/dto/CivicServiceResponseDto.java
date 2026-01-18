@@ -1,4 +1,6 @@
-package com.trbtree.infotree.modules.civic.entity;
+package com.trbtree.infotree.modules.civic.dto;
+import com.trbtree.infotree.modules.civic.entity.CivicServiceEntity;
+
 import java.time.OffsetDateTime;
 import java.util.Map;
 
