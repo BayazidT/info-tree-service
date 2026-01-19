@@ -1,6 +1,7 @@
 package com.trbtree.infotree.modules.civic.controller;
 
 import com.trbtree.infotree.modules.civic.dto.CivicServiceCreateDto;
+import com.trbtree.infotree.modules.civic.dto.CivicServiceListResponse;
 import com.trbtree.infotree.modules.civic.dto.CivicServiceResponseDto;
 import com.trbtree.infotree.modules.civic.sevice.CivicService;
 import jakarta.persistence.EntityNotFoundException;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -54,6 +56,14 @@ public class CivicController {
         // Return 201 Created with Location header
         URI location = URI.create("/api/civic-services/" + created.id());
         return ResponseEntity.created(location).body(created);
+    }
+
+    @GetMapping()
+    public ResponseEntity<CivicServiceListResponse> getCivicServiceList(@RequestParam(defaultValue = "0") int page,
+                                                                        @RequestParam(defaultValue = "10") int size,
+                                                                        @RequestParam(required = false) String search){
+
+        return ResponseEntity.ok(civicServiceService.getCivicServiceList(page, size, search));
     }
 
     /**

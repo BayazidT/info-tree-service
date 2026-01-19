@@ -1,6 +1,7 @@
 package com.trbtree.infotree.modules.civic.sevice;
 
 import com.trbtree.infotree.modules.civic.dto.CivicServiceCreateDto;
+import com.trbtree.infotree.modules.civic.dto.CivicServiceListResponse;
 import com.trbtree.infotree.modules.civic.dto.CivicServiceResponseDto;
 import com.trbtree.infotree.modules.civic.entity.*;
 import com.trbtree.infotree.modules.civic.repository.CategoryRepository;
@@ -9,9 +10,13 @@ import com.trbtree.infotree.modules.civic.repository.CivicServiceRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.time.OffsetDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -58,4 +63,33 @@ public class CivicService {
 
         return CivicServiceResponseDto.fromEntity(saved);
     }
+
+    public CivicServiceListResponse getCivicServiceList(int page, int size, String search) {
+
+        Pageable pageable = PageRequest.of(
+                page,
+                size,
+                Sort.by(Sort.Direction.DESC, "createdAt")
+        );
+
+        Page<CivicServiceEntity> pageResult =
+                civicServiceRepository.findAllWithJoins(pageable);
+
+        List<CivicServiceResponseDto> data = pageResult
+                .getContent()
+                .stream()
+                .map(CivicServiceResponseDto::fromEntity)
+                .toList();
+
+        return new CivicServiceListResponse(
+                pageResult.getTotalElements(),
+                pageResult.getTotalPages(),
+                pageResult.getNumber(),
+                pageResult.getSize(),
+                pageResult.isFirst(),
+                pageResult.isLast(),
+                data
+        );
+    }
+
 }
