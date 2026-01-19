@@ -31,7 +31,9 @@ public record CivicServiceResponseDto(
                 entity.is24h7(),
                 entity.getLastVerified(),
                 // Parse JSONB string → Map (use Jackson/ObjectMapper in service layer)
-                Map.of()  // placeholder – implement parsing
+                entity.getExtraAttributes() == null
+                        ? Map.of()
+                        : Map.copyOf(entity.getExtraAttributes())
         );
     }
 }
