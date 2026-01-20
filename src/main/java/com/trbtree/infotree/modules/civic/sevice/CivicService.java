@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -92,4 +93,8 @@ public class CivicService {
         );
     }
 
+    public CivicServiceResponseDto findById(Long id) {
+        Optional<CivicServiceEntity> entity = civicServiceRepository.findById(id);
+        return null;
+    }
 }
