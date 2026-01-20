@@ -69,13 +69,12 @@ public class CivicController {
     /**
      * Optional: GET a single civic service by ID
      */
-//    @GetMapping("/{id}")
-//    public ResponseEntity<CivicServiceResponseDto> getCivicService(@PathVariable Long id) {
-//        CivicServiceResponseDto dto = civicServiceService.findById(id)
-//                .orElseThrow(() -> new EntityNotFoundException("Civic service not found with id: " + id));
-//
-//        return ResponseEntity.ok(dto);
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity<CivicServiceResponseDto> getCivicService(@PathVariable Long id) {
+        CivicServiceResponseDto dto = civicServiceService.findById(id);
+
+        return ResponseEntity.ok(dto);
+    }
 
     /**
      * Optional: Simple search endpoint (expand later with filters)
