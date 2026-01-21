@@ -94,7 +94,12 @@ public class CivicService {
     }
 
     public CivicServiceResponseDto findById(Long id) {
-        Optional<CivicServiceEntity> entity = civicServiceRepository.findById(id);
-        return null;
+        CivicServiceEntity entity = civicServiceRepository
+                .findByIdWithJoins(id)
+                .orElseThrow(() ->
+                        new EntityNotFoundException("Civic service not found with id: " + id)
+                );
+
+        return CivicServiceResponseDto.fromEntity(entity);
     }
 }
