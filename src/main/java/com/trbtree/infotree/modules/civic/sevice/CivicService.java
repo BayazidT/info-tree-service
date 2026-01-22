@@ -1,5 +1,6 @@
 package com.trbtree.infotree.modules.civic.sevice;
 
+import com.trbtree.infotree.exception.DataNotFoundException;
 import com.trbtree.infotree.modules.civic.dto.CivicServiceCreateDto;
 import com.trbtree.infotree.modules.civic.dto.CivicServiceListResponse;
 import com.trbtree.infotree.modules.civic.dto.CivicServiceResponseDto;
@@ -97,7 +98,7 @@ public class CivicService {
         CivicServiceEntity entity = civicServiceRepository
                 .findByIdWithJoins(id)
                 .orElseThrow(() ->
-                        new EntityNotFoundException("Civic service not found with id: " + id)
+                        new DataNotFoundException("Civic service not found with id: " + id)
                 );
 
         return CivicServiceResponseDto.fromEntity(entity);
