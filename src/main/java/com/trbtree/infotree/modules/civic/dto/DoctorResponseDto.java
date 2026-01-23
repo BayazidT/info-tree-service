@@ -3,7 +3,6 @@ package com.trbtree.infotree.modules.civic.dto;
 import com.trbtree.infotree.modules.civic.entity.DoctorEntity;
 
 import java.util.Map;
-import java.util.Set;
 public record DoctorResponseDto(
         Long id,
         String title,

@@ -30,11 +30,12 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/info-tree-service/api/v1/private/doctor/**").permitAll()
-                        .requestMatchers("/info-tree-service/api/v1/private/civic/**").permitAll()
-                        .requestMatchers("/api/v1/public/auth/register").permitAll()
-                        .requestMatchers("/api/v1/public/auth/login", "/error").permitAll()
-                        .requestMatchers("/api/auth/refresh").permitAll()
+//                        .requestMatchers("/info-tree-service/api/v1/private/users/**").permitAll()
+//                        .requestMatchers("/info-tree-service/api/v1/private/doctor/**").permitAll()
+//                        .requestMatchers("/info-tree-service/api/v1/private/civic/**").permitAll()
+                        .requestMatchers("/info-tree-service/api/v1/public/auth/register").permitAll()
+                        .requestMatchers("/info-tree-service/api/v1/public/auth/login", "/error").permitAll()
+                        .requestMatchers("/info-tree-service/api/auth/refresh").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exception -> exception

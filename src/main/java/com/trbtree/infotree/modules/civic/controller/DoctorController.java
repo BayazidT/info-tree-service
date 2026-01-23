@@ -1,6 +1,7 @@
 package com.trbtree.infotree.modules.civic.controller;
 
 import com.trbtree.infotree.modules.civic.dto.DoctorCreateDto;
+import com.trbtree.infotree.modules.civic.dto.DoctorListResponseDto;
 import com.trbtree.infotree.modules.civic.dto.DoctorResponseDto;
 import com.trbtree.infotree.modules.civic.sevice.DoctorService;
 import jakarta.validation.Valid;
@@ -31,6 +32,14 @@ public class DoctorController {
                 .created(URI.create("/api/doctors/" + created.id()))
                 .body(created);
     }
+
+    @GetMapping
+    public DoctorListResponseDto getDoctorList(@RequestParam(defaultValue = "0") int page,
+                                               @RequestParam(defaultValue = "10") int size,
+                                               @RequestParam(required = false) String search){
+        return doctorService.getDoctorList(page, size, search);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<DoctorResponseDto> getDoctor(@PathVariable Long id) {
         DoctorResponseDto dto = doctorService.getDoctorById(id);

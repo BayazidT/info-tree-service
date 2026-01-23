@@ -1,6 +1,7 @@
 package com.trbtree.infotree.modules.civic.sevice;
 
 import com.trbtree.infotree.modules.civic.dto.DoctorCreateDto;
+import com.trbtree.infotree.modules.civic.dto.DoctorListResponseDto;
 import com.trbtree.infotree.modules.civic.dto.DoctorResponseDto;
 import com.trbtree.infotree.modules.civic.entity.*;
 import com.trbtree.infotree.modules.civic.repository.CategoryRepository;
@@ -11,6 +12,10 @@ import com.trbtree.infotree.modules.user.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -110,6 +115,32 @@ public class DoctorService {
         return bySpecialty.stream()
                 .map(DoctorResponseDto::fromEntity)
                 .toList();
+    }
+
+    public DoctorListResponseDto getDoctorList(int page, int size, String search) {
+        Pageable pageable = PageRequest.of(
+                page,
+                size,
+                Sort.by(Sort.Direction.DESC, "createdAt")
+        );
+        Page<DoctorEntity> entities = doctorRepository.findAll(pageable);
+
+        List<DoctorResponseDto> content = entities
+                .getContent()
+                .stream()
+                .map(DoctorResponseDto::fromEntity)
+                .toList();
+
+        return new DoctorListResponseDto(
+                entities.getTotalElements(),
+                entities.getTotalPages(),
+                entities.getNumber(),
+                entities.getSize(),
+                entities.isFirst(),
+                entities.isLast(),
+                content
+        );
+
     }
 
     // When location is back:
