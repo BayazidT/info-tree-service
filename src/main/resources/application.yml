@@ -27,7 +27,8 @@ jwt:
   secret: ${JWT_SECRET}
   access-expiration: 900000   # 15 min
   refresh-expiration: 604800000 # 7 days
-
+springdoc:
+  override-with-generic-response: false
 logging:
   level:
     org.springframework: INFO

@@ -8,9 +8,8 @@ public record CityResponseDto(
         String name,
         String country,
         String adminLevel,
-        Integer population,
-        OffsetDateTime createdAt,
-        OffsetDateTime updatedAt
+        Integer population
+
 ) {
     public static CityResponseDto fromEntity(City city) {
         return new CityResponseDto(
@@ -18,10 +17,7 @@ public record CityResponseDto(
                 city.getName(),
                 city.getCountry(),
                 city.getAdminLevel(),
-                city.getPopulation(),
-
-                city.getCreatedAt(),
-                city.getUpdatedAt()
+                city.getPopulation()
         );
     }
 }

@@ -84,13 +84,8 @@ public class GlobalExceptionHandler {
     }
 
     // Catch-all for unexpected exceptions (log these in production!)
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGenericException(
-            Exception ex, HttpServletRequest request) {
-
-        // In real apps, log the full stack trace here
-        ex.printStackTrace();
-
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException ex, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 "Internal Server Error",
@@ -99,4 +94,5 @@ public class GlobalExceptionHandler {
         );
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
 }

@@ -1,11 +1,12 @@
 package com.trbtree.infotree.modules.civic.dto;
+import com.trbtree.infotree.modules.civic.entity.DomainEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public record CityCreateDto(
+public record CategoryCreateDto(
         @NotBlank @Size(min = 1, max = 100) String name,
-        @Size(max = 100) String country,
-        @Size(max = 50) String adminLevel,
-        Integer population
+        String description,
+        Integer parentId,
+        DomainEnum domain
 ) {}
 
