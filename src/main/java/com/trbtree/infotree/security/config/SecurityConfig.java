@@ -34,7 +34,7 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/info-tree-service/api/v1/public/auth/register").permitAll()
+                        .requestMatchers("/api/v1/public/auth/**", "/error").permitAll()
                         .requestMatchers("/info-tree-service/api/v1/public/auth/login", "/error").permitAll()
                         .requestMatchers("/info-tree-service/api/auth/refresh").permitAll()
                         .anyRequest().authenticated()

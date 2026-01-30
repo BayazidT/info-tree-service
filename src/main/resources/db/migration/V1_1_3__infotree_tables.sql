@@ -1,9 +1,5 @@
--- Enable required extensions
-CREATE EXTENSION IF NOT EXISTS "pgcrypto";    -- For gen_random_uuid()
-CREATE EXTENSION IF NOT EXISTS "postgis";     -- For geospatial support
-
+-- Enable required extensions<<<<<
 -- This is the key line: install the types/functions into your app schema
-CREATE EXTENSION IF NOT EXISTS postgis SCHEMA infotree;
 
 -- Optional but good: also install topology if you ever need it
 -- CREATE EXTENSION IF NOT EXISTS postgis_topology SCHEMA infotree;
