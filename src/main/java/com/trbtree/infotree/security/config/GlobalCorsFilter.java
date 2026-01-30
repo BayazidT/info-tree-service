@@ -18,7 +18,7 @@ public class GlobalCorsFilter {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.setAllowedOrigins(List.of("http://localhost:5173"));
-        config.setAllowedOrigins(List.of("https://treeinfo.trbtree.com"));
+//        config.setAllowedOrigins(List.of("https://treeinfo.trbtree.com"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
