@@ -1,4 +1,4 @@
-package com.trbtree.infotree.modules.civic.sevice;
+package com.trbtree.infotree.modules.civic.service;
 
 import com.trbtree.infotree.exception.DataNotFoundException;
 import com.trbtree.infotree.modules.civic.dto.CivicServiceCreateDto;

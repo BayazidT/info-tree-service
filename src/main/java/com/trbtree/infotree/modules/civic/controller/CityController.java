@@ -1,7 +1,7 @@
 package com.trbtree.infotree.modules.civic.controller;
 
 import com.trbtree.infotree.modules.civic.dto.CityResponseDto;
-import com.trbtree.infotree.modules.civic.sevice.CityService;
+import com.trbtree.infotree.modules.civic.service.CityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

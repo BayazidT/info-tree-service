@@ -1,11 +1,10 @@
-package com.trbtree.infotree.modules.civic.sevice;
+package com.trbtree.infotree.modules.civic.service;
 
 import com.trbtree.infotree.modules.civic.dto.CategoryResponseDto;
 import com.trbtree.infotree.modules.civic.entity.Category;
 import com.trbtree.infotree.modules.civic.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

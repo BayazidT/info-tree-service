@@ -1,4 +1,4 @@
-package com.trbtree.infotree.modules.civic.sevice;
+package com.trbtree.infotree.modules.civic.service;
 
 import com.trbtree.infotree.modules.civic.dto.DoctorCreateDto;
 import com.trbtree.infotree.modules.civic.dto.DoctorListResponseDto;
@@ -7,7 +7,6 @@ import com.trbtree.infotree.modules.civic.entity.*;
 import com.trbtree.infotree.modules.civic.repository.CategoryRepository;
 import com.trbtree.infotree.modules.civic.repository.CityRepository;
 import com.trbtree.infotree.modules.civic.repository.DoctorRepository;
-import com.trbtree.infotree.modules.user.entity.User;
 import com.trbtree.infotree.modules.user.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -16,7 +15,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
