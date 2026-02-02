@@ -3,13 +3,10 @@ package com.trbtree.infotree.modules.civic.controller;
 import com.trbtree.infotree.modules.civic.dto.DoctorCreateDto;
 import com.trbtree.infotree.modules.civic.dto.DoctorListResponseDto;
 import com.trbtree.infotree.modules.civic.dto.DoctorResponseDto;
-import com.trbtree.infotree.modules.civic.sevice.DoctorService;
+import com.trbtree.infotree.modules.civic.service.DoctorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;

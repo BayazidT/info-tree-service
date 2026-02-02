@@ -2,7 +2,7 @@ package com.trbtree.infotree.modules.civic.controller;
 
 
 import com.trbtree.infotree.modules.civic.dto.CategoryResponseDto;
-import com.trbtree.infotree.modules.civic.sevice.CategoryService;
+import com.trbtree.infotree.modules.civic.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

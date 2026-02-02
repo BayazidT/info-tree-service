@@ -3,8 +3,7 @@ package com.trbtree.infotree.modules.civic.controller;
 import com.trbtree.infotree.modules.civic.dto.CivicServiceCreateDto;
 import com.trbtree.infotree.modules.civic.dto.CivicServiceListResponse;
 import com.trbtree.infotree.modules.civic.dto.CivicServiceResponseDto;
-import com.trbtree.infotree.modules.civic.sevice.CivicService;
-import jakarta.persistence.EntityNotFoundException;
+import com.trbtree.infotree.modules.civic.service.CivicService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.time.LocalDate;
-import java.util.List;
 
 @RestController
 @RequestMapping("/info-tree-service/api/v1/private/civic")
