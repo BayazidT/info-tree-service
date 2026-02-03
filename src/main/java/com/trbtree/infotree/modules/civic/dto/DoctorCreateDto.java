@@ -9,6 +9,7 @@ public record DoctorCreateDto(
         String lastName,
         String address,
         Long cityId,
+        Long departmentId,
         Long categoryId,                // e.g. "Allgemeinmediziner"
         Set<String> specialties,
         Set<String> languages,

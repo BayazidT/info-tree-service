@@ -44,13 +44,13 @@ public class DoctorService {
 
         // 2. Create doctor entity (extends BaseEntity)
         DoctorEntity doctor = new DoctorEntity();
+        DoctorDepartment department = new DoctorDepartment();
+        department.setId(dto.departmentId());
 
         // Set inherited/common fields (directly on doctor)
         doctor.setCategory(category);
-//        doctor.setTitle(String.format("%s %s %s",
-//                dto.title() != null ? dto.title() + " " : "",
-//                dto.firstName(), dto.lastName()).trim());
         doctor.setTitle(dto.title());
+        doctor.setDoctorDepartment(department);
         doctor.setDescription("");
         doctor.setAddress(dto.address());
         doctor.setCity(city);
