@@ -11,6 +11,8 @@ public record DoctorResponseDto(
         String fullName,                // computed field
         String address,
         String cityName,
+        String departmentNameBn,
+        String departmentNameEn,
 //        Set<String> specialties,
         boolean acceptsNewPatients,
         boolean telemedicineAvailable,
@@ -39,7 +41,8 @@ public record DoctorResponseDto(
                 fullName,
                 entity.getAddress(),
                 entity.getCity() != null ? entity.getCity().getName() : null,
-//                Set.copyOf(entity.getSpecialties()),           // immutable copy
+                entity.getDoctorDepartment() != null ? entity.getDoctorDepartment().getNameBn(): null,
+                entity.getDoctorDepartment() != null ? entity.getDoctorDepartment().getNameEn(): null,
                 entity.isAcceptsNewPatients(),
                 entity.isTelemedicineAvailable(),
                 entity.getAppointmentUrl(),
