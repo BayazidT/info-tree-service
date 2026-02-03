@@ -29,7 +29,16 @@ public class DoctorEntity extends BaseEntity {
     private Gender gender;                  // M, F, D, X (divers)
 
     @Column(name = "id_number", length = 20, unique = true)
-    private String idNumber;                // Approbation / license number
+    private String idNumber;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+            name = "doctor_department_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_doctor_department")
+    )
+    private DoctorDepartment doctorDepartment;
+// Approbation / license number
 
     // -------------------------------------------------------------------------
     // Specialties & Languages
