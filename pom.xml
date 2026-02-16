@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.trbtree</groupId>
-	<artifactId>infotree-service</artifactId>
+	<artifactId>trbtree-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>infotree</name>
 	<description>Info Tree Service</description>
